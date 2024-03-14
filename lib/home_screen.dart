@@ -1,68 +1,54 @@
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class HomeScreen extends StatefulWidget {
+  final Color startColor;
+  final Color nextColor;
+
+  const HomeScreen({super.key, this.startColor = Colors.blue, this.nextColor = Colors.green});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  Color? _color;
+
+
+  @override
+  void initState() {
+    super.initState();
+    _color = widget.startColor;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.blue,
-        centerTitle: true,
-        leading: IconButton(
-          onPressed: () {
-            print('Hello World!');
-          },
-          icon: const Icon(
-            Icons.airplanemode_on,
-            color: Colors.white,
-          ),
-        ),
-        title: const Text(
-          'My Title',
-          style: TextStyle(
-            color: Colors.white,
-          ),
-        ),
-      ),
       backgroundColor: Colors.white,
-      body: const Center(
-        child: Text(
-          'Hello',
-          style: TextStyle(
-            color: Colors.amber,
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
+      body: Center(
+        child: SizedBox(
+          width: 50,
+          height: 50,
+          child: Material(
+            color: _color,
+            child: InkWell(
+              onTap: () {
+                setState(() {
+                  _color = _color == widget.startColor ? widget.nextColor : widget.startColor;
+                });
+              },
+            ),
           ),
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: Colors.blue,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.favorite,
-            ),
-            label: 'Favorites',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.calendar_today,
-            ),
-            label: 'Today',
-          ),
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.blue,
-        shape: const CircleBorder(),
-        onPressed: () {
-          print('Ohhhhhh Clique!!!');
-        },
-        child: const Icon(
-          Icons.add,
-          color: Colors.white,
-        ),
+        // child: GestureDetector(
+        //   onTap: () {
+        //     print('Click me!');
+        //   },
+        //   child: Container(
+        //     width: 50,
+        //     height: 50,
+        //     color: Colors.red,
+        //   ),
+        // ),
       ),
     );
   }
