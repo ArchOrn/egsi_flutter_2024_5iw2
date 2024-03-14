@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_5iw2/custom_theme.dart';
 import 'package:flutter_5iw2/home_screen.dart';
 
 void main() {
@@ -12,7 +13,9 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const HomeScreen(),
+      home: const CustomTheme(
+        child: HomeScreen(),
+      ),
       theme: ThemeData(
         textTheme: const TextTheme(
           displayMedium: TextStyle(

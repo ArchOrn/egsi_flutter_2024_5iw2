@@ -8,16 +8,10 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
-      child: CustomTheme(
-        child: Center(
-          child: Builder(
-            builder: (context) {
-              return Text(
-                'Hello',
-                style: CustomTheme.of(context).textStyleXS,
-              );
-            }
-          ),
+      child: Center(
+        child:  Text(
+          'Hello',
+          style: CustomTheme.of(context).textStyleXS,
         ),
       ),
     );
