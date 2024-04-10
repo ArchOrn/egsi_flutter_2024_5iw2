@@ -8,7 +8,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  Color _color = Colors.red;
+  Color _backgroundColor = Colors.white;
 
   @override
   Widget build(BuildContext context) {
@@ -32,10 +32,14 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: _backgroundColor,
       body: Center(
         child: Square(
-          color: _color,
+          onTap: () {
+            setState(() {
+              _backgroundColor = _backgroundColor == Colors.white ? Colors.black : Colors.white;
+            });
+          },
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -59,9 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Colors.blue,
         shape: const CircleBorder(),
         onPressed: () {
-          setState(() {
-            _color = _color == Colors.red ? Colors.blue : Colors.red;
-          });
+          print('Hello World!');
         },
         child: const Icon(
           Icons.add,
@@ -73,16 +75,19 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 class Square extends StatelessWidget {
-  final Color color;
+  final VoidCallback onTap;
 
-  const Square({super.key, required this.color});
+  const Square({super.key, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 50,
-      height: 50,
-      color: color,
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: 50,
+        height: 50,
+        color: Colors.red,
+      ),
     );
   }
 }
