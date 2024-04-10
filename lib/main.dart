@@ -12,9 +12,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const HomeScreen(
-        startColor: Colors.pink,
-      ),
+      home: const HomeScreen(),
       theme: ThemeData(
         useMaterial3: true,
       ),
