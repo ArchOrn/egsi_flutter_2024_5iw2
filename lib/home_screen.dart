@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_5iw2/calendar_screen.dart';
-import 'package:flutter_5iw2/favorites_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -10,25 +8,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final screens = [
-    ScreenDef(
-      icon: Icons.favorite,
-      label: 'Favorites',
-      widget: const FavoritesScreen(),
-    ),
-    ScreenDef(
-      icon: Icons.calendar_today,
-      label: 'Today',
-      widget: const CalendarScreen(),
-    ),
-    ScreenDef(
-      icon: Icons.verified_user,
-      label: 'Toto',
-      widget: const FavoritesScreen(),
-    ),
-  ];
-
-  int _currentIndex = 0;
+  Color _color = Colors.red;
 
   @override
   Widget build(BuildContext context) {
@@ -53,29 +33,35 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       backgroundColor: Colors.white,
-      body: screens[_currentIndex].widget,
+      body: Center(
+        child: Square(
+          color: _color,
+        ),
+      ),
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
         selectedItemColor: Colors.blue,
-        items: screens.map((e) {
-          return BottomNavigationBarItem(
+        items: const [
+          BottomNavigationBarItem(
             icon: Icon(
-              e.icon,
+              Icons.favorite,
             ),
-            label: e.label,
-          );
-        }).toList(),
+            label: 'Favorites',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.calendar_today,
+            ),
+            label: 'Today',
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.blue,
         shape: const CircleBorder(),
         onPressed: () {
-          print('Ohhhhhh Clique!!!');
+          setState(() {
+            _color = _color == Colors.red ? Colors.blue : Colors.red;
+          });
         },
         child: const Icon(
           Icons.add,
@@ -86,10 +72,17 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-class ScreenDef {
-  final IconData icon;
-  final String label;
-  final Widget widget;
+class Square extends StatelessWidget {
+  final Color color;
 
-  ScreenDef({required this.icon, required this.label, required this.widget});
+  const Square({super.key, required this.color});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 50,
+      height: 50,
+      color: color,
+    );
+  }
 }
