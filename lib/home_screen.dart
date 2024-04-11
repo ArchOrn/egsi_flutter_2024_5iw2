@@ -8,13 +8,16 @@ class HomeScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
-        body: ListView.builder(
+        body: GridView.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            // mainAxisExtent: 400,
+            mainAxisSpacing: 10,
+            crossAxisSpacing: 10
+          ),
           itemBuilder: (context, index) {
-            return ListTile(
-              leading: const Icon(Icons.person),
-              title: Text('First Name $index Last Name $index'),
-              subtitle: Text('$index, rue du Faubourg St Antoine'),
-              onTap: () {},
+            return Container(
+              color: Colors.red,
             );
           },
           itemCount: 100000,
