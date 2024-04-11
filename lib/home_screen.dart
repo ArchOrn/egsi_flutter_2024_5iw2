@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_5iw2/red_circle.dart';
+import 'package:flutter_5iw2/red_square.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -8,85 +10,93 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  Color _backgroundColor = Colors.white;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.blue,
-        centerTitle: true,
-        leading: IconButton(
-          onPressed: () {
-            print('Hello World!');
-          },
-          icon: const Icon(
-            Icons.airplanemode_on,
-            color: Colors.white,
-          ),
-        ),
-        title: const Text(
-          'My Title',
-          style: TextStyle(
-            color: Colors.white,
-          ),
-        ),
-      ),
-      backgroundColor: _backgroundColor,
-      body: Center(
-        child: Square(
-          onTap: () {
-            setState(() {
-              _backgroundColor = _backgroundColor == Colors.white ? Colors.black : Colors.white;
-            });
-          },
-        ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: Colors.blue,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.favorite,
+      body: Column(
+        children: [
+          Expanded(
+            child: Column(
+              children: [
+                Expanded(
+                  flex: 2,
+                  child: Container(
+                    color: Colors.pink,
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    width: double.infinity,
+                    color: Colors.orange,
+                    child: Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Wrap(
+                        spacing: 8,
+                        runSpacing: 8,
+                        children: [
+                          ...List.generate(24, (index) {
+                            return const RedCircle();
+                          }),
+                        ],
+                      ),
+                    ),
+                  ),
+                )
+              ],
             ),
-            label: 'Favorites',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.calendar_today,
+          Expanded(
+            child: Stack(
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        height: double.infinity,
+                        color: Colors.amber,
+                        child: const Padding(
+                          padding: EdgeInsets.all(10),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              RedCircle(),
+                              SizedBox(width: 8),
+                              RedCircle(),
+                              Spacer(),
+                              RedCircle(),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Container(
+                        color: Colors.blue,
+                      ),
+                    )
+                  ],
+                ),
+                // const Positioned.fill(
+                //   child: Center(
+                //     child: RedSquare(),
+                //   ),
+                // ),
+                // const Positioned.fill(
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.center,
+                //     children: [
+                //       RedSquare()
+                //     ],
+                //   ),
+                // ),
+                const Align(
+                  alignment: Alignment.center,
+                  child: RedSquare(),
+                ),
+              ],
             ),
-            label: 'Today',
-          ),
+          )
         ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.blue,
-        shape: const CircleBorder(),
-        onPressed: () {
-          print('Hello World!');
-        },
-        child: const Icon(
-          Icons.add,
-          color: Colors.white,
-        ),
-      ),
-    );
-  }
-}
-
-class Square extends StatelessWidget {
-  final VoidCallback onTap;
-
-  const Square({super.key, required this.onTap});
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        width: 50,
-        height: 50,
-        color: Colors.red,
       ),
     );
   }
