@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 class CalendarScreen extends StatelessWidget {
-  static Future<void> navigateTo(BuildContext context) {
-    return Navigator.of(context).pushNamed('/calendar');
+  static Future<void> navigateTo(BuildContext context, {required String username}) {
+    return Navigator.of(context).pushNamed('/calendar', arguments: username);
   }
 
-  const CalendarScreen({super.key});
+  final String username;
+
+  const CalendarScreen({super.key, required this.username});
 
   @override
   Widget build(BuildContext context) {
@@ -17,9 +19,9 @@ class CalendarScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
-                'Calendar screen',
-                style: TextStyle(
+              Text(
+                'Calendar of $username',
+                style: const TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
                 ),
