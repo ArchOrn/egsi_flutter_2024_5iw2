@@ -39,27 +39,33 @@ class _HomeScreenState extends State<HomeScreen> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
-        body: _loading
-            ? const Center(
-                child: CircularProgressIndicator(),
-              )
-            : (_error != null
-                ? Center(
-                    child: Text(
-                      _error.toString(),
-                      style: const TextStyle(color: Colors.red),
-                    ),
-                  )
-                : ListView.builder(
-                    itemBuilder: (context, index) {
-                      final post = _posts[index];
-                      return ListTile(
-                        title: Text(post.title),
-                        subtitle: Text(post.body),
-                      );
-                    },
-                    itemCount: _posts.length,
-                  )),
+        body: Builder(builder: (context) {
+          if (_loading) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+
+          if (_error != null) {
+            return Center(
+              child: Text(
+                _error.toString(),
+                style: const TextStyle(color: Colors.red),
+              ),
+            );
+          }
+
+          return ListView.builder(
+            itemBuilder: (context, index) {
+              final post = _posts[index];
+              return ListTile(
+                title: Text(post.title),
+                subtitle: Text(post.body),
+              );
+            },
+            itemCount: _posts.length,
+          );
+        }),
       ),
     );
   }
