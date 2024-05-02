@@ -13,7 +13,7 @@ class CalendarScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SafeArea(
+    return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
         body: SizedBox(
@@ -21,19 +21,19 @@ class CalendarScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
+              const Text(
                 'Calendar screen',
                 style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              // ElevatedButton(
-              //   onPressed: () {
-              //     // TODO
-              //   },
-              //   child: const Text('Go!'),
-              // )
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text('<- Back'),
+              )
             ],
           ),
         ),
