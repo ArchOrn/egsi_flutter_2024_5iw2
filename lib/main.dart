@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_5iw2/calendar/calendar_screen.dart';
 import 'package:flutter_5iw2/home/home_screen.dart';
 
 void main() {
@@ -12,7 +13,10 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const HomeScreen(),
+      routes: {
+        '/': (context) => const HomeScreen(),
+        '/calendar': (context) => const CalendarScreen(),
+      },
       theme: ThemeData(
         useMaterial3: true,
       ),
