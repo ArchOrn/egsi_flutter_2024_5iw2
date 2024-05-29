@@ -18,4 +18,18 @@ class ApiServices {
       throw ApiException(message: 'Unknown error while requesting products');
     }
   }
+
+  static Future<Product> getProduct({required int id}) async {
+    try {
+      final response = await http.get(Uri.parse('https://dummyjson.com/products/$id'));
+      if (response.statusCode < 200 || response.statusCode >= 400) {
+        throw ApiException(message: 'Error while requesting product with id $id', statusCode: response.statusCode);
+      }
+
+      final data = json.decode(response.body) as Map<String, dynamic>;
+      return Product.fromJson(data);
+    } catch (error) {
+      throw ApiException(message: 'Unknown error while requesting product with id $id');
+    }
+  }
 }
