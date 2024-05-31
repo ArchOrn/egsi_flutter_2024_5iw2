@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_5iw2/home/blocs/home_bloc.dart';
 import 'package:flutter_5iw2/product/blocs/product_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -74,13 +73,6 @@ class ProductScreen extends StatelessWidget {
                                 Text(product.description),
                                 const SizedBox(height: 10),
                                 _buildRating(context, rating: product.rating),
-                                const SizedBox(height: 10),
-                                ElevatedButton(
-                                  onPressed: () {
-                                    context.read<HomeBloc>().add(HomeDataLoaded());
-                                  },
-                                  child: const Text('Click me!'),
-                                ),
                               ],
                             ),
                           )
